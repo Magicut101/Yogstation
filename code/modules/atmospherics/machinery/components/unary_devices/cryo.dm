@@ -81,13 +81,7 @@
 /obj/machinery/atmospherics/components/unary/cryo_cell/contents_explosion(severity, target)
 	..()
 	if(beaker)
-		switch(severity)
-			if(EXPLODE_DEVASTATE)
-				SSexplosions.high_mov_atom += beaker
-			if(EXPLODE_HEAVY)
-				SSexplosions.med_mov_atom += beaker
-			if(EXPLODE_LIGHT)
-				SSexplosions.low_mov_atom += beaker
+		beaker.ex_act(severity, target)
 
 /obj/machinery/atmospherics/components/unary/cryo_cell/handle_atom_del(atom/A)
 	..()
@@ -338,13 +332,11 @@
 		return
 	return ..()
 
-/obj/machinery/atmospherics/components/unary/cryo_cell/ui_state(mob/user)
-	return GLOB.notcontained_state
-
-/obj/machinery/atmospherics/components/unary/cryo_cell/ui_interact(mob/user, datum/tgui/ui)
-	ui = SStgui.try_update_ui(user, src, ui)
+/obj/machinery/atmospherics/components/unary/cryo_cell/ui_interact(mob/user, ui_key = "main", datum/tgui/ui = null, force_open = FALSE, \
+																	datum/tgui/master_ui = null, datum/ui_state/state = GLOB.notcontained_state)
+	ui = SStgui.try_update_ui(user, src, ui_key, ui, force_open)
 	if(!ui)
-		ui = new(user, src, "Cryo", name)
+		ui = new(user, src, ui_key, "Cryo", name, 400, 550, master_ui, state)
 		ui.open()
 
 /obj/machinery/atmospherics/components/unary/cryo_cell/ui_data()
@@ -459,7 +451,7 @@
 		if(node)
 			node.atmosinit()
 			node.addMember(src)
-		SSair.add_to_rebuild_queue(src)
+		build_network()
 
 /obj/machinery/atmospherics/components/unary/cryo_cell/CtrlClick(mob/user)
 	if(!user.canUseTopic(src, !issilicon(user)))

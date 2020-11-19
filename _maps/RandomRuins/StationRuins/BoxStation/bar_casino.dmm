@@ -155,7 +155,7 @@
 /turf/open/floor/carpet,
 /area/crew_quarters/bar)
 "au" = (
-/obj/structure/musician/piano,
+/obj/structure/piano,
 /turf/open/floor/carpet,
 /area/crew_quarters/bar)
 "av" = (
@@ -727,7 +727,6 @@
 	dir = 4;
 	icon_state = "scrub_map_on-3"
 	},
-/obj/effect/landmark/start/cook,
 /turf/open/floor/plasteel/ameridiner,
 /area/crew_quarters/kitchen)
 "bR" = (
@@ -827,10 +826,8 @@
 /area/crew_quarters/kitchen)
 "cg" = (
 /obj/structure/table,
-/obj/item/reagent_containers/glass/mixbowl{
-	pixel_x = 1;
-	pixel_y = 3
-	},
+/obj/item/stack/packageWrap,
+/obj/item/reagent_containers/food/condiment/enzyme,
 /turf/open/floor/plasteel/ameridiner,
 /area/crew_quarters/kitchen)
 "ck" = (
@@ -907,22 +904,6 @@
 /obj/structure/sign/barsign,
 /turf/closed/wall,
 /area/crew_quarters/bar)
-"ge" = (
-/obj/structure/table,
-/obj/item/kitchen/rollingpin{
-	pixel_x = 4;
-	pixel_y = -2
-	},
-/obj/item/reagent_containers/food/condiment/peppermill{
-	pixel_x = -3;
-	pixel_y = 8
-	},
-/obj/item/reagent_containers/food/condiment/saltshaker{
-	pixel_x = -8;
-	pixel_y = 4
-	},
-/turf/open/floor/plasteel/ameridiner,
-/area/crew_quarters/kitchen)
 "ij" = (
 /obj/structure/sign/plaques/deempisi,
 /turf/closed/wall{
@@ -953,22 +934,6 @@
 	icon_state = "showroomfloor"
 	},
 /area/crew_quarters/kitchen)
-"AK" = (
-/obj/structure/table,
-/obj/item/reagent_containers/food/condiment/enzyme{
-	layer = 5
-	},
-/obj/item/stack/packageWrap,
-/turf/open/floor/plasteel/ameridiner,
-/area/crew_quarters/kitchen)
-"Fj" = (
-/obj/structure/table,
-/obj/item/storage/box/donkpockets{
-	pixel_x = 3;
-	pixel_y = 3
-	},
-/turf/open/floor/plasteel/ameridiner,
-/area/crew_quarters/kitchen)
 "Gp" = (
 /obj/effect/landmark/event_spawn,
 /turf/open/floor/carpet,
@@ -996,6 +961,14 @@
 	},
 /turf/open/floor/carpet,
 /area/crew_quarters/bar)
+"Sc" = (
+/obj/structure/table,
+/obj/item/reagent_containers/glass/mixbowl{
+	pixel_x = 1;
+	pixel_y = 5
+	},
+/turf/open/floor/plasteel/ameridiner,
+/area/crew_quarters/kitchen)
 "Sl" = (
 /obj/effect/landmark/event_spawn,
 /turf/closed/wall,
@@ -1009,11 +982,6 @@
 	},
 /turf/open/floor/carpet,
 /area/crew_quarters/bar)
-"TA" = (
-/obj/structure/table,
-/obj/item/reagent_containers/food/snacks/mint,
-/turf/open/floor/plasteel/ameridiner,
-/area/crew_quarters/kitchen)
 "UT" = (
 /obj/structure/table,
 /obj/machinery/requests_console{
@@ -1324,8 +1292,8 @@ bi
 am
 bA
 bQ
-TA
-AK
+cf
+co
 co
 co
 bK
@@ -1341,8 +1309,8 @@ bs
 bB
 bc
 cg
-Fj
 cq
+co
 co
 bL
 aa
@@ -1356,8 +1324,8 @@ zc
 am
 bC
 bS
-ge
-cf
+bm
+cq
 co
 cP
 bN
@@ -1372,8 +1340,8 @@ aQ
 am
 aU
 bT
-bm
-cf
+Sc
+co
 co
 co
 bN

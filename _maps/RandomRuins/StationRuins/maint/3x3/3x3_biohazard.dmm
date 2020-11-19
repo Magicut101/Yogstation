@@ -28,10 +28,6 @@
 /obj/item/reagent_containers/glass/bottle/mutagen,
 /turf/open/floor/plating,
 /area/template_noop)
-"l" = (
-/obj/effect/decal/cleanable/greenglow,
-/turf/open/floor/plating,
-/area/template_noop)
 "v" = (
 /obj/effect/decal/cleanable/blood/xtracks,
 /turf/open/floor/plating{
@@ -42,6 +38,11 @@
 /obj/item/reagent_containers/glass/bottle/synaptizine,
 /obj/structure/table/glass,
 /obj/effect/spawner/lootdrop/maintenance/three,
+/turf/open/floor/plating,
+/area/template_noop)
+"G" = (
+/obj/effect/mob_spawn/human/corpse/assistant,
+/obj/effect/decal/cleanable/greenglow,
 /turf/open/floor/plating,
 /area/template_noop)
 "T" = (
@@ -64,7 +65,7 @@ d
 i
 "}
 (2,1,1) = {"
-l
+G
 e
 v
 "}

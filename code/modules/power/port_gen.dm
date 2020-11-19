@@ -223,10 +223,11 @@
 	if(anchored)
 		TogglePower()
 
-/obj/machinery/power/port_gen/pacman/ui_interact(mob/user, datum/tgui/ui)
-	ui = SStgui.try_update_ui(user, src, ui)
+/obj/machinery/power/port_gen/pacman/ui_interact(mob/user, ui_key = "main", datum/tgui/ui = null, force_open = FALSE, \
+												datum/tgui/master_ui = null, datum/ui_state/state = GLOB.default_state)
+	ui = SStgui.try_update_ui(user, src, ui_key, ui, force_open)
 	if(!ui)
-		ui = new(user, src, "PortableGenerator", name)
+		ui = new(user, src, ui_key, "PortableGenerator", name, 450, 340, master_ui, state)
 		ui.open()
 
 /obj/machinery/power/port_gen/pacman/ui_data()

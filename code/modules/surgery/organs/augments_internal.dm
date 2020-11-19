@@ -105,7 +105,6 @@
 		COMSIG_LIVING_STATUS_KNOCKDOWN,
 		COMSIG_LIVING_STATUS_IMMOBILIZE,
 		COMSIG_LIVING_STATUS_PARALYZE,
-		COMSIG_CARBON_STATUS_STAMCRIT,
 	)
 
 	var/stun_cap_amount = 40
@@ -124,7 +123,10 @@
 
 /obj/item/organ/cyberimp/brain/anti_stun/proc/clear_stuns()
 	if(owner || !(organ_flags & ORGAN_FAILING))
-		owner.remove_CC()
+		owner.SetStun(0)
+		owner.SetKnockdown(0)
+		owner.SetImmobilized(0)
+		owner.SetParalyzed(0)
 
 /obj/item/organ/cyberimp/brain/anti_stun/emp_act(severity)
 	. = ..()

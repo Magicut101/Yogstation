@@ -2,23 +2,17 @@
 ////////////////////////////////
 /proc/message_admins(msg)
 	msg = "<span class=\"admin\"><span class=\"prefix\">ADMIN LOG:</span> <span class=\"message linkify\">[msg]</span></span>"
-	to_chat(GLOB.admins,
-		type = MESSAGE_TYPE_ADMINLOG,
-		html = msg,
-		confidential = TRUE)
+	to_chat(GLOB.admins, msg, confidential=TRUE)
 
 /proc/relay_msg_admins(msg)
 	msg = "<span class=\"admin\"><span class=\"prefix\">RELAY:</span> <span class=\"message linkify\">[msg]</span></span>"
-	to_chat(GLOB.admins,
-		type = MESSAGE_TYPE_ADMINLOG,
-		html = msg,
-		confidential = TRUE)
+	to_chat(GLOB.admins, msg, confidential=TRUE)
 
 
 ///////////////////////////////////////////////////////////////////////////////////////////////Panels
 
 /datum/admins/proc/show_player_panel(mob/M in GLOB.mob_list)
-	set category = "Misc.Unused"
+	set category = "Admin"
 	set name = "Show Player Panel"
 	set desc="Edit player (respawn, ban, heal, etc)"
 
@@ -216,8 +210,8 @@
 
 
 /datum/admins/proc/access_news_network() //MARKER
-	set category = "Admin.Round Interaction"
-	set name = "Access Newscaster"
+	set category = "Fun"
+	set name = "Access Newscaster Network"
 	set desc = "Allows you to view, add and edit news feeds."
 
 	if (!istype(src, /datum/admins))
@@ -524,7 +518,7 @@
 		SSblackbox.record_feedback("tally", "admin_verb", 1, "End Round") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
 
 /datum/admins/proc/announce()
-	set category = "Server.Global Messages"
+	set category = "Special Verbs"
 	set name = "Announce"
 	set desc="Announce your desires to the world"
 	if(!check_rights(0))
@@ -539,7 +533,7 @@
 	SSblackbox.record_feedback("tally", "admin_verb", 1, "Announce") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
 
 /datum/admins/proc/set_admin_notice()
-	set category = "Admin"
+	set category = "Special Verbs"
 	set name = "Set Admin Notice"
 	set desc ="Set an announcement that appears to everyone who joins the server. Only lasts this round"
 	if(!check_rights(0))
@@ -607,11 +601,10 @@
 	GLOB.enter_allowed = !( GLOB.enter_allowed )
 	if (!( GLOB.enter_allowed ))
 		to_chat(world, "<B>New players may no longer enter the game.</B>")
-		message_admins("<span class='adminnotice'>[key_name_admin(usr)] toggled new player game entering, no players may enter.</span>")
 	else
 		to_chat(world, "<B>New players may now enter the game.</B>")
-		message_admins("<span class='adminnotice'>[key_name_admin(usr)] toggled new player game entering, players can now enter the game freely.</span>")
 	log_admin("[key_name(usr)] toggled new player game entering.")
+	message_admins("<span class='adminnotice'>[key_name_admin(usr)] toggled new player game entering.</span>")
 	world.update_status()
 	SSblackbox.record_feedback("nested tally", "admin_toggle", 1, list("Toggle Entering", "[GLOB.enter_allowed ? "Enabled" : "Disabled"]")) //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
 
@@ -684,7 +677,7 @@
 				SSticker.Reboot(delay = 100, force = TRUE)
 
 /datum/admins/proc/unprison(mob/M in GLOB.mob_list)
-	set category = "Admin.Player Interaction"
+	set category = "Admin"
 	set name = "Unprison"
 	if (is_centcom_level(M.z))
 		SSjob.SendToLateJoin(M)
@@ -697,7 +690,7 @@
 ////////////////////////////////////////////////////////////////////////////////////////////////ADMIN HELPER PROCS
 
 /datum/admins/proc/spawn_atom(object as text)
-	set category = "Misc.Server Debug"
+	set category = "Debug"
 	set desc = "(atom path) Spawn an atom"
 	set name = "Spawn"
 
@@ -719,7 +712,7 @@
 	SSblackbox.record_feedback("tally", "admin_verb", 1, "Spawn Atom") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
 
 /datum/admins/proc/podspawn_atom(object as text)
-	set category = "Misc.Server Debug"
+	set category = "Debug"
 	set desc = "(atom path) Spawn an atom via supply drop"
 	set name = "Podspawn"
 
@@ -743,7 +736,7 @@
 	SSblackbox.record_feedback("tally", "admin_verb", 1, "Podspawn Atom") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
 
 /datum/admins/proc/spawn_cargo(object as text)
-	set category = "Misc.Server Debug"
+	set category = "Debug"
 	set desc = "(atom path) Spawn a cargo crate"
 	set name = "Spawn Cargo"
 
@@ -760,9 +753,9 @@
 	log_admin("[key_name(usr)] spawned cargo pack [chosen] at [AREACOORD(usr)]")
 	SSblackbox.record_feedback("tally", "admin_verb", 1, "Spawn Cargo") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
 
-/datum/admins/proc/show_traitor_panel(mob/M in GLOB.mob_list)
-	set category = "Admin.Player Interaction"
 
+/datum/admins/proc/show_traitor_panel(mob/M in GLOB.mob_list)
+	set category = "Admin"
 	set desc = "Edit mobs's memory and role"
 	set name = "Show Traitor Panel"
 
@@ -778,7 +771,7 @@
 
 
 /datum/admins/proc/toggletintedweldhelmets()
-	set category = "Misc.Server Debug"
+	set category = "Debug"
 	set desc="Reduces view range when wearing welding helmets"
 	set name="Toggle tinted welding helmes"
 	GLOB.tinted_weldhelh = !( GLOB.tinted_weldhelh )
@@ -919,7 +912,7 @@
 	user << browse(dat, "window=dyn_mode_options;size=900x650")
 
 /datum/admins/proc/create_or_modify_area()
-	set category = "Misc.Server Debug"
+	set category = "Debug"
 	set name = "Create or modify area"
 	create_area(usr)
 

@@ -35,7 +35,7 @@
 			M.client.show_popup_menus = TRUE
 			M.client.show_verb_panel = TRUE
 			M.notransform = FALSE
-			add_verb(M, M.client.afreeze_stored_verbs)
+			M.verbs += M.client.afreeze_stored_verbs
 			message = "[key_name(usr)] has unfrozen [key_name(M)]."
 		else
 			to_chat(M, "<span class='userdanger'>You have been frozen by an administrator.</span>")
@@ -44,7 +44,7 @@
 			M.client.show_verb_panel = FALSE
 			M.notransform = TRUE
 			M.client.afreeze_stored_verbs = M.verbs.Copy()
-			remove_verb(M, M.verbs.Copy())
+			M.verbs.Cut()
 			message = "[key_name(usr)] has frozen [key_name(M)]."
 		log_admin(message)
 		message_admins(message) //yogs end
@@ -486,7 +486,7 @@
 		GLOB.dynamic_stacking_limit = input(usr,"Change the threat limit at which round-endings rulesets will start to stack.", "Change stacking limit", null) as num
 		log_admin("[key_name(usr)] set 'stacking_limit' to [GLOB.dynamic_stacking_limit].")
 		message_admins("[key_name(usr)] set 'stacking_limit' to [GLOB.dynamic_stacking_limit].")
-		dynamic_mode_options(usr)
+		dynamic_mode_options(usr)	
 
 	else if(href_list["f_dynamic_high_pop_limit"])
 		if(!check_rights(R_ADMIN))
@@ -505,7 +505,7 @@
 
 		log_admin("[key_name(usr)] set 'high_pop_limit' to [GLOB.dynamic_high_pop_limit].")
 		message_admins("[key_name(usr)] set 'high_pop_limit' to [GLOB.dynamic_high_pop_limit].")
-		dynamic_mode_options(usr)
+		dynamic_mode_options(usr)		
 
 	else if(href_list["f_dynamic_forced_threat"])
 		if(!check_rights(R_ADMIN))
@@ -811,10 +811,6 @@
 			var/message_id = href_list["deletemessageempty"]
 			delete_message(message_id, browse = TRUE)
 
-	else if(href_list["viewdemo"])
-		var/roundnumber = href_list["viewdemo"]
-		usr.client.demoview(roundnumber)
-
 	else if(href_list["editmessage"])
 		if(!check_rights(R_ADMIN))
 			return
@@ -928,7 +924,7 @@
 
 	else if(href_list["f_secret"])
 		return HandleFSecret()
-
+		
 	else if(href_list["f_dynamic_roundstart"])
 		if(!check_rights(R_ADMIN))
 			return
@@ -1174,7 +1170,7 @@
 		GLOB.dynamic_stacking_limit = input(usr,"Change the threat limit at which round-endings rulesets will start to stack.", "Change stacking limit", null) as num
 		log_admin("[key_name(usr)] set 'stacking_limit' to [GLOB.dynamic_stacking_limit].")
 		message_admins("[key_name(usr)] set 'stacking_limit' to [GLOB.dynamic_stacking_limit].")
-		dynamic_mode_options(usr)
+		dynamic_mode_options(usr)	
 
 	else if(href_list["f_dynamic_high_pop_limit"])
 		if(!check_rights(R_ADMIN))
@@ -1193,7 +1189,7 @@
 
 		log_admin("[key_name(usr)] set 'high_pop_limit' to [GLOB.dynamic_high_pop_limit].")
 		message_admins("[key_name(usr)] set 'high_pop_limit' to [GLOB.dynamic_high_pop_limit].")
-		dynamic_mode_options(usr)
+		dynamic_mode_options(usr)		
 
 	else if(href_list["f_dynamic_forced_threat"])
 		if(!check_rights(R_ADMIN))
@@ -1212,7 +1208,7 @@
 
 		log_admin("[key_name(usr)] set 'forced_threat_level' to [GLOB.dynamic_forced_threat_level].")
 		message_admins("[key_name(usr)] set 'forced_threat_level' to [GLOB.dynamic_forced_threat_level].")
-		dynamic_mode_options(usr)
+		dynamic_mode_options(usr)	
 
 
 
@@ -2394,7 +2390,7 @@
 		dat += "</BODY></HTML>"
 
 		usr << browse(dat.Join("<br>"), "window=related_[C];size=420x300")
-
+	
 	else if(href_list["centcomlookup"])
 		if(!check_rights(R_ADMIN))
 			return

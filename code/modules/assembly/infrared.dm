@@ -3,6 +3,10 @@
 	desc = "Emits a visible or invisible beam and is triggered when the beam is interrupted."
 	icon_state = "infrared"
 	is_position_sensitive = TRUE
+
+
+	var/ui_x = 225
+	var/ui_y = 110
 	var/on = FALSE
 	var/visible = FALSE
 	var/maxlength = 8
@@ -136,7 +140,7 @@
 	. = ..()
 	setDir(t)
 
-/obj/item/assembly/infra/throw_at(atom/target, range, speed, mob/thrower, spin=1, diagonals_first = 0, datum/callback/callback, force, gentle = FALSE, quickstart = TRUE)
+/obj/item/assembly/infra/throw_at(atom/target, range, speed, mob/thrower, spin=1, diagonals_first = 0, datum/callback/callback, force, gentle = FALSE)
 	. = ..()
 	olddir = dir
 
@@ -188,10 +192,11 @@
 		return ..()
 	return UI_CLOSE
 
-/obj/item/assembly/infra/ui_interact(mob/user, datum/tgui/ui)
-	ui = SStgui.try_update_ui(user, src, ui)
+/obj/item/assembly/infra/ui_interact(mob/user, ui_key = "main", datum/tgui/ui = null, force_open = FALSE, \
+									datum/tgui/master_ui = null, datum/ui_state/state = GLOB.default_state)
+	ui = SStgui.try_update_ui(user, src, ui_key, ui, force_open)
 	if(!ui)
-		ui = new(user, src, "InfraredEmitter", name)
+		ui = new(user, src, ui_key, "InfraredEmitter", name, ui_x, ui_y, master_ui, state)
 		ui.open()
 
 /obj/item/assembly/infra/ui_data(mob/user)

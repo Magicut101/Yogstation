@@ -34,7 +34,7 @@ export const Sleeper = (props, context) => {
   ];
 
   return (
-    <Window width={310} height={465}>
+    <Window>
       <Window.Content scrollable>
         <Section
           title={occupant.name ? occupant.name : 'No Occupant'}

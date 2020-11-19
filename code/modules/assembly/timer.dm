@@ -2,8 +2,12 @@
 	name = "timer"
 	desc = "Used to time things. Works well with contraptions which has to count down. Tick tock."
 	icon_state = "timer"
-	materials = list(/datum/material/iron=500, /datum/material/glass=50)
+	materials = list(MAT_METAL=500, MAT_GLASS=50)
 	attachable = TRUE
+
+	var/ui_x = 275
+	var/ui_y = 115
+	
 	var/timing = FALSE
 	var/time = 5
 	var/saved_time = 5
@@ -90,10 +94,11 @@
 		return ..()
 	return UI_CLOSE
 
-/obj/item/assembly/timer/ui_interact(mob/user, datum/tgui/ui)
-	ui = SStgui.try_update_ui(user, src, ui)
+/obj/item/assembly/timer/ui_interact(mob/user, ui_key = "main", datum/tgui/ui = null, force_open = FALSE, \
+									datum/tgui/master_ui = null, datum/ui_state/state = GLOB.default_state)
+	ui = SStgui.try_update_ui(user, src, ui_key, ui, force_open)
 	if(!ui)
-		ui = new(user, src, "Timer", name)
+		ui = new(user, src, ui_key, "Timer", name, ui_x, ui_y, master_ui, state)
 		ui.open()
 
 

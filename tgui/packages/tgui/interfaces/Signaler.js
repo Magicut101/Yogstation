@@ -14,9 +14,7 @@ export const Signaler = (props, context) => {
   } = data;
 
   return (
-    <Window
-      width={280}
-      height={132}>
+    <Window>
       <Window.Content>
         <Section>
           <Grid>

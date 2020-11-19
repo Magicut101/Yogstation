@@ -78,11 +78,9 @@
 					controller.cycleClose(door)
 		else
 			controller.onlyClose(door)
-		addtimer(CALLBACK(src, .proc/not_busy), 2 SECONDS)
-
-/obj/machinery/doorButtons/access_button/proc/not_busy()
-	busy = FALSE
-	update_icon()
+		sleep(20)
+		busy = FALSE
+		update_icon()
 
 /obj/machinery/doorButtons/access_button/update_icon()
 	if(stat & NOPOWER)
@@ -254,6 +252,7 @@
 
 /obj/machinery/doorButtons/airlock_controller/ui_interact(mob/user)
 	var/datum/browser/popup = new(user, "computer", name)
+	popup.set_title_image(user.browse_rsc_icon(src.icon, src.icon_state))
 	popup.set_content(returnText())
 	popup.open()
 

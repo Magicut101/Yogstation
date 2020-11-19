@@ -117,7 +117,6 @@
 
 #undef VAMP_DRAIN_AMOUNT
 
-
 /obj/item/organ/heart/vampire
 	name = "vampire heart"
 	actions_types = list(/datum/action/item_action/organ_action/vampire_heart)

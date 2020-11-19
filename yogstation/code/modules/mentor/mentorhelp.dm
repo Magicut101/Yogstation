@@ -6,9 +6,9 @@
 	if(!msg)	return
 
 	//remove out mentorhelp verb temporarily to prevent spamming of mentors.
-	remove_verb(src, /client/verb/mentorhelp)
+	verbs -= /client/verb/mentorhelp
 	spawn(300)
-		add_verb(src, /client/verb/mentorhelp)	// 30 second cool-down for mentorhelp
+		verbs += /client/verb/mentorhelp	// 30 second cool-down for mentorhelp
 
 	webhook_send_mhelp(key_name_mentor(src), msg)
 

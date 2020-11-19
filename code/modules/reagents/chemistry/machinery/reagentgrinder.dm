@@ -46,13 +46,7 @@
 
 /obj/machinery/reagentgrinder/contents_explosion(severity, target)
 	if(container)
-		switch(severity)
-			if(EXPLODE_DEVASTATE)
-				SSexplosions.high_mov_atom += container
-			if(EXPLODE_HEAVY)
-				SSexplosions.med_mov_atom += container
-			if(EXPLODE_LIGHT)
-				SSexplosions.low_mov_atom += container
+		container.ex_act(severity, target)
 
 /obj/machinery/reagentgrinder/RefreshParts()
 	speed = 1

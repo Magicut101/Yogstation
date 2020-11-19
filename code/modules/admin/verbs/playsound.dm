@@ -1,5 +1,5 @@
 /client/proc/play_sound(S as sound)
-	set category = "Server.Global Messages"
+	set category = "Fun"
 	set name = "Play Global Sound"
 	if(!check_rights(R_SOUNDS))
 		return
@@ -33,7 +33,9 @@
 
 	for(var/mob/M in GLOB.player_list)
 		if(M.client.prefs.toggles & SOUND_MIDI)
-			admin_sound.volume = vol * M.client.admin_music_volume
+			var/user_vol = M.client.chatOutput.adminMusicVolume
+			if(user_vol)
+				admin_sound.volume = vol * (user_vol / 100)
 			SEND_SOUND(M, admin_sound)
 			admin_sound.volume = vol
 			count++ //Yogs
@@ -47,7 +49,7 @@
 
 
 /client/proc/play_local_sound(S as sound)
-	set category = "Server.Global Messages"
+	set category = "Fun"
 	set name = "Play Local Sound"
 	if(!check_rights(R_SOUNDS))
 		return
@@ -58,7 +60,7 @@
 	SSblackbox.record_feedback("tally", "admin_verb", 1, "Play Local Sound") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
 
 /client/proc/play_web_sound()
-	set category = "Server.Global Messages"
+	set category = "Fun"
 	set name = "Play Internet Sound"
 	if(!check_rights(R_SOUNDS))
 		return
@@ -74,6 +76,7 @@
 		var/stop_web_sounds = FALSE
 		var/list/music_extra_data = list()
 		if(length(web_sound_input))
+
 			web_sound_input = trim(web_sound_input)
 			if(findtext(web_sound_input, ":") && !findtext(web_sound_input, GLOB.is_http_protocol))
 				to_chat(src, "<span class='boldwarning'>Non-http(s) URIs are not allowed.</span>", confidential=TRUE)
@@ -101,8 +104,6 @@
 						webpage_url = "<a href=\"[data["webpage_url"]]\">[title]</a>"
 					music_extra_data["start"] = data["start_time"]
 					music_extra_data["end"] = data["end_time"]
-					music_extra_data["link"] = data["webpage_url"]
-					music_extra_data["title"] = data["title"]
 
 					var/res = alert(usr, "Show the title of and link to this song to the players?\n[title]",, "No", "Yes", "Cancel")
 					switch(res)
@@ -132,16 +133,16 @@
 			for(var/m in GLOB.player_list)
 				var/mob/M = m
 				var/client/C = M.client
-				if(C.prefs.toggles & SOUND_MIDI)
+				if((C.prefs.toggles & SOUND_MIDI) && C.chatOutput && !C.chatOutput.broken && C.chatOutput.loaded)
 					if(!stop_web_sounds)
-						C.tgui_panel?.play_music(web_sound_url, music_extra_data)
+						C.chatOutput.sendMusic(web_sound_url, music_extra_data)
 					else
-						C.tgui_panel?.stop_music()
+						C.chatOutput.stopMusic()
 
 	SSblackbox.record_feedback("tally", "admin_verb", 1, "Play Internet Sound")
 
 /client/proc/set_round_end_sound(S as sound)
-	set category = "Server.Global Messages"
+	set category = "Fun"
 	set name = "Set Round End Sound"
 	if(!check_rights(R_SOUNDS))
 		return
@@ -149,7 +150,7 @@
 	//Yogs start -- Adds confirm for whenever an admin has already set the roundend sound.
 	var/static/lastadmin
 	var/static/lastsound
-
+	
 	if(lastadmin && src.ckey != lastadmin)
 		if(alert("Warning: Another Admin, [lastadmin], already set the roundendsound to [lastsound]. Overwrite?",,"Yes","Cancel") != "Yes")
 			return
@@ -163,7 +164,7 @@
 	SSblackbox.record_feedback("tally", "admin_verb", 1, "Set Round End Sound") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
 
 /client/proc/stop_sounds()
-	set category = "Server.Global Messages"
+	set category = "Debug"
 	set name = "Stop All Playing Sounds"
 	if(!src.holder)
 		return
@@ -174,5 +175,6 @@
 		if(M.client)
 			SEND_SOUND(M, sound(null))
 			var/client/C = M.client
-			C?.tgui_panel?.stop_music()
+			if(C && C.chatOutput && !C.chatOutput.broken && C.chatOutput.loaded)
+				C.chatOutput.stopMusic()
 	SSblackbox.record_feedback("tally", "admin_verb", 1, "Stop All Playing Sounds") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!

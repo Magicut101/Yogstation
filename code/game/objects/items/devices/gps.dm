@@ -21,8 +21,7 @@ GLOBAL_LIST_EMPTY(GPS_list)
 	. = ..()
 	GLOB.GPS_list += src
 	name = "global positioning system ([gpstag])"
-	if(tracking) //Some roundstart GPS are off.
-		add_overlay("working")
+	add_overlay("working")
 
 /obj/item/gps/Destroy()
 	GLOB.GPS_list -= src
@@ -64,18 +63,19 @@ GLOBAL_LIST_EMPTY(GPS_list)
 		tracking = TRUE
 
 
-/obj/item/gps/ui_interact(mob/user, datum/tgui/ui) // Remember to use the appropriate state.
+/obj/item/gps/ui_interact(mob/user, ui_key = "gps", datum/tgui/ui = null, force_open = FALSE, datum/tgui/master_ui = null, datum/ui_state/state = GLOB.default_state) // Remember to use the appropriate state.
 	if(emped)
 		to_chat(user, "[src] fizzles weakly.")
 		return
-	ui = SStgui.try_update_ui(user, src, ui)
+	ui = SStgui.try_update_ui(user, src, ui_key, ui, force_open)
 	if(!ui)
 		// Variable window height, depending on how many GPS units there are
 		// to show
-		ui = new(user, src, "Gps") //width, height
+		var/gps_window_height = clamp(325 + GLOB.GPS_list.len * 24, 325, 700)
+		ui = new(user, src, ui_key, "Gps", "Global Positioning System", 470, gps_window_height, master_ui, state) //width, height
 		ui.open()
 
-	ui.set_autoupdate(updating)
+	ui.set_autoupdate(state = updating)
 
 
 /obj/item/gps/ui_data(mob/user)

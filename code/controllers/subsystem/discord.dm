@@ -14,6 +14,7 @@ SUBSYSTEM_DEF(discord)
 	name = "Discord"
 	flags = SS_NO_FIRE
 
+	var/list/account_link_cache = list() // List that holds accounts to link, used in conjunction with TGS
 	var/notify_file = file("data/notify.json")
 
  // Returns ID from ckey
@@ -43,13 +44,14 @@ SUBSYSTEM_DEF(discord)
 	qdel(query_get_discord_ckey)
 
  // Finalises link
-/datum/controller/subsystem/discord/proc/link_account(ckey, id)
+/datum/controller/subsystem/discord/proc/link_account(ckey)
 	var/datum/DBQuery/link_account = SSdbcore.NewQuery(
 		"UPDATE [format_table_name("player")] SET discord_id = :discord_id WHERE ckey = :ckey",
-		list("discord_id" = id, "ckey" = ckey)
+		list("discord_id" = account_link_cache[ckey], "ckey" = ckey)
 	)
 	link_account.Execute()
 	qdel(link_account)
+	account_link_cache -= ckey
 
  // Unlink account (Admin verb used)
 /datum/controller/subsystem/discord/proc/unlink_account(ckey)

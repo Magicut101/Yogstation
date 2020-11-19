@@ -171,9 +171,10 @@
 	ui_interact(user)
 	return TRUE
 
-/obj/item/clockwork/slab/ui_interact(mob/user, datum/tgui/ui)
+/obj/item/clockwork/slab/ui_interact(mob/user, ui_key = "main", datum/tgui/ui = null, force_open = FALSE, datum/tgui/master_ui = null, datum/ui_state/state = GLOB.inventory_state)
+	ui = SStgui.try_update_ui(user, src, ui_key, ui, force_open)
 	if(!ui)
-		ui = new(user, src, "ClockworkSlab", name)
+		ui = new(user, src, ui_key, "ClockworkSlab", name, 800, 420, master_ui, state)
 		ui.set_autoupdate(FALSE) //we'll update this occasionally, but not as often as possible
 		ui.open()
 

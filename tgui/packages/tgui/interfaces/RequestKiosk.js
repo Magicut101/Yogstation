@@ -1,15 +1,15 @@
+import { filter, sortBy } from 'common/collections';
+import { flow } from 'common/fp';
+import { classes } from 'common/react';
 import { Fragment } from 'inferno';
-import { useBackend } from '../backend';
+import { useBackend, useLocalState } from '../backend';
 import { Box, Button, Collapsible, Flex, LabeledList, NumberInput, Section, TextArea } from '../components';
 import { formatMoney } from '../format';
-import { Window } from '../layouts';
+import { refocusLayout, Window } from '../layouts';
 
 export const RequestKiosk = (props, context) => {
   return (
-    <Window
-      width={550}
-      height={600}
-      resizable>
+    <Window resizable>
       <Window.Content scrollable>
         <RequestKioskContent />
       </Window.Content>

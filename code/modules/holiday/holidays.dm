@@ -396,17 +396,14 @@
 		"https://www.youtube.com/watch?v=m9We2XsVZfc", // Ghostbusters Theme
 		"https://www.youtube.com/watch?v=xIx_HbmRnQY", // Thriller
 		"https://www.youtube.com/watch?v=7-D83f33pAE", // Spooky Scary Skeletons
-		"https://www.youtube.com/watch?v=bebUeWgNkAM", // Halloween Theme Michael Myers
-		"https://www.youtube.com/watch?v=qaQ6oJL1qQA", // Lucifer My Love - Twin Temple
-		"https://www.youtube.com/watch?v=vCYLUZyWeDs&t", // "Unforgiving Cold"- Godzilla NES Creepypasta OST
-		"https://www.youtube.com/watch?v=OPDDFdyKOgU" // Red Signal - The Bifrost Incident - The Mechanisms
+		"https://www.youtube.com/watch?v=bebUeWgNkAM" // Halloween Theme Michael Myers
 		)
 
 /datum/holiday/halloween/greet()
 	return "Have a spooky Halloween!"
 
 /datum/holiday/halloween/getStationPrefix()
-	return pick("Bone-Rattling","Mr. Bones' Own","2SPOOKY","Spooky","Scary","Skeletons","The Haunted","Abominable","Gibbering","Squamous","Ghoul","Zombie","Forbidden","Bloody","Horrific","Infernal","Star Spawned","Hellish","Forgotten","Eldritch","Sleeping","Eternal","Abhorrence","Plague","Dread","Apprehension","Crawling Chaos","Blot","Cold Sweat","Unholy","Jitters","Unknown","Darkness","Festering","Fetid","Vile","Lurker","Scorn","Apocalypse","The Last","Lasting","Corruption","Blasphemous","The Corruption on","The Blasphemous")
+	return pick("Bone-Rattling","Mr. Bones' Own","2SPOOKY","Spooky","Scary","Skeletons")
 
 /datum/holiday/vegan
 	name = "Vegan Day"
@@ -595,7 +592,7 @@ Since Ramadan is an entire month that lasts 29.5 days on average, the start and 
 	return (dd == 13 && ddd == FRIDAY)
 
 /datum/holiday/friday_thirteenth/getStationPrefix()
-	return pick("Mike","Friday","Evil","Myers","Murder","Deathly","Stabby","Voorhees","Jason","Mother","Krueger","Telephone","Slasher","Flick","Hockey","Chevron")
+	return pick("Mike","Friday","Evil","Myers","Murder","Deathly","Stabby")
 
 /datum/holiday/easter
 	name = EASTER

@@ -20,7 +20,7 @@
 	pump = new(src, FALSE)
 	pump.on = TRUE
 	pump.stat = 0
-	SSair.add_to_rebuild_queue(pump)
+	pump.build_network()
 
 /obj/machinery/portable_atmospherics/pump/Destroy()
 	var/turf/T = get_turf(src)
@@ -80,10 +80,11 @@
 			investigate_log("[key_name(user)] started a transfer into [holding].<br>", INVESTIGATE_ATMOS)
 
 
-/obj/machinery/portable_atmospherics/pump/ui_interact(mob/user, datum/tgui/ui)
-	ui = SStgui.try_update_ui(user, src, ui)
+/obj/machinery/portable_atmospherics/pump/ui_interact(mob/user, ui_key = "main", datum/tgui/ui = null, force_open = FALSE, \
+														datum/tgui/master_ui = null, datum/ui_state/state = GLOB.physical_state)
+	ui = SStgui.try_update_ui(user, src, ui_key, ui, force_open)
 	if(!ui)
-		ui = new(user, src, "PortablePump", name)
+		ui = new(user, src, ui_key, "PortablePump", name, 300, 315, master_ui, state)
 		ui.open()
 
 /obj/machinery/portable_atmospherics/pump/ui_data()

@@ -16,7 +16,7 @@ export const EnergyHarvester = (props, context) => {
   } = data;
 
   return (
-    <Window width={300} height={270} resizable>
+    <Window resizable>
       <Window.Content scrollable>
         <Section title="Input">
           <LabeledList>

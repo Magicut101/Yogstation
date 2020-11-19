@@ -5,7 +5,7 @@
 ////////////////////////////////////////////////SANDWICHES////////////////////////////////////////////////
 
 /datum/crafting_recipe/food/grilledcheesesandwich
-	name = "Cheese Sandwich"
+	name = "Grilled Cheese Sandwich"
 	reqs = list(
 		/obj/item/reagent_containers/food/snacks/breadslice/plain = 2,
 		/obj/item/reagent_containers/food/snacks/cheesewedge = 2

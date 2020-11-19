@@ -7,6 +7,8 @@
 	use_power = IDLE_POWER_USE
 	idle_power_usage = 40
 	circuit = /obj/item/circuitboard/machine/biogenerator
+	ui_x = 550
+	ui_y = 380
 	var/processing = FALSE
 	var/obj/item/reagent_containers/glass/beaker = null
 	var/points = 0
@@ -32,17 +34,6 @@
 	if(A == beaker)
 		beaker = null
 		update_icon()
-
-/obj/machinery/biogenerator/contents_explosion(severity, target)
-	..()
-	if(beaker)
-		switch(severity)
-			if(EXPLODE_DEVASTATE)
-				SSexplosions.high_mov_atom += beaker
-			if(EXPLODE_HEAVY)
-				SSexplosions.med_mov_atom += beaker
-			if(EXPLODE_LIGHT)
-				SSexplosions.low_mov_atom += beaker
 
 /obj/machinery/biogenerator/RefreshParts()
 	var/E = 0
@@ -192,13 +183,13 @@
 		update_icon()
 
 /obj/machinery/biogenerator/proc/check_cost(list/materials, multiplier = 1, remove_points = TRUE)
-	if(materials.len != 1 || materials[1] != getmaterialref(/datum/material/biomass))
+	if(materials.len != 1 || materials[1] != MAT_BIOMASS)
 		return FALSE
-	if (materials[getmaterialref(/datum/material/biomass)]*multiplier/efficiency > points)
+	if (materials[MAT_BIOMASS]*multiplier/efficiency > points)
 		return FALSE
 	else
 		if(remove_points)
-			points -= materials[getmaterialref(/datum/material/biomass)]*multiplier/efficiency
+			points -= materials[MAT_BIOMASS]*multiplier/efficiency
 		update_icon()
 		return TRUE
 
@@ -257,15 +248,17 @@
 		return UI_CLOSE
 	return ..()
 
-/obj/machinery/biogenerator/ui_assets(mob/user)
-	return list(
-		get_asset_datum(/datum/asset/spritesheet/research_designs),
-	)
+/obj/machinery/biogenerator/ui_base_html(html)
+	var/datum/asset/spritesheet/simple/assets = get_asset_datum(/datum/asset/spritesheet/research_designs)
+	. = replacetext(html, "<!--customheadhtml-->", assets.css_tag())
 
-/obj/machinery/biogenerator/ui_interact(mob/user, datum/tgui/ui)
-	ui = SStgui.try_update_ui(user, src, ui)
+/obj/machinery/biogenerator/ui_interact(mob/user, ui_key = "main", datum/tgui/ui = null, force_open = FALSE, \
+									datum/tgui/master_ui = null, datum/ui_state/state = GLOB.default_state)
+	ui = SStgui.try_update_ui(user, src, ui_key, ui, force_open)
 	if(!ui)
-		ui = new(user, src, "Biogenerator", name)
+		var/datum/asset/assets = get_asset_datum(/datum/asset/spritesheet/research_designs)
+		assets.send(user)
+		ui = new(user, src, ui_key, "Biogenerator", name, ui_x, ui_y, master_ui, state)
 		ui.open()
 
 /obj/machinery/biogenerator/ui_data(mob/user)
@@ -301,7 +294,7 @@
 			cat["items"] += list(list(
 				"id" = D.id,
 				"name" = D.name,
-				"cost" = D.materials[getmaterialref(/datum/material/biomass)]/efficiency,
+				"cost" = D.materials[MAT_BIOMASS]/efficiency,
 			))
 		data["categories"] += list(cat)
 

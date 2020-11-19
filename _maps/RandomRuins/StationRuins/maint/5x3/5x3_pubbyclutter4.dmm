@@ -30,7 +30,7 @@
 /turf/open/floor/plating,
 /area/template_noop)
 "j" = (
-/obj/structure/musician/piano,
+/obj/structure/piano,
 /turf/open/floor/plating,
 /area/template_noop)
 "l" = (

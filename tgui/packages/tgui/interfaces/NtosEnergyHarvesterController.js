@@ -21,7 +21,7 @@ export const NtosEnergyHarvesterController = (props, context) => {
     last_payout,
   } = data;
   return (
-    <NtosWindow width={300} height={270} resizable>
+    <NtosWindow resizable>
       <NtosWindow.Content scrollable>
         <Section title="Input">
           <LabeledList>

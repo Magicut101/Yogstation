@@ -157,7 +157,7 @@
 	resistance_flags = FLAMMABLE
 	max_integrity = 100
 	seed = /obj/item/seeds/lavaland/polypore
-	distill_reagent = /datum/reagent/consumable/ethanol/polyporepop
+	wine_power = 20
 
 /obj/item/reagent_containers/food/snacks/grown/ash_flora/Initialize()
 	. = ..()
@@ -171,21 +171,21 @@
 	desc = "A leaf, from a mushroom."
 	icon_state = "mushroom_leaf"
 	seed = /obj/item/seeds/lavaland/porcini
-	distill_reagent = /datum/reagent/consumable/ethanol/porcinisap
+	wine_power = 40
 
 /obj/item/reagent_containers/food/snacks/grown/ash_flora/mushroom_cap
 	name = "mushroom cap"
 	desc = "The cap of a large mushroom."
 	icon_state = "mushroom_cap"
 	seed = /obj/item/seeds/lavaland/inocybe
-	distill_reagent = /datum/reagent/consumable/ethanol/inocybeshine
+	wine_power = 70
 
 /obj/item/reagent_containers/food/snacks/grown/ash_flora/mushroom_stem
 	name = "mushroom stem"
 	desc = "A long mushroom stem. It's slightly glowing."
 	icon_state = "mushroom_stem"
 	seed = /obj/item/seeds/lavaland/ember
-	distill_reagent = /datum/reagent/consumable/ethanol/embershroomcream
+	wine_power = 60
 
 /obj/item/reagent_containers/food/snacks/grown/ash_flora/cactus_fruit
 	name = "cactus fruit"

@@ -166,7 +166,6 @@
 		else
 			client.eye = card
 
-
 /mob/living/silicon/pai/get_status_tab_items()
 	. += ..()
 	if(!stat)

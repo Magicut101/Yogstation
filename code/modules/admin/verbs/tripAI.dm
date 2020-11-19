@@ -1,6 +1,6 @@
 /client/proc/triple_ai()
-	set category = "Misc"
-	set name = "Toggle AI Triumvirate"
+	set category = "Fun"
+	set name = "Create AI Triumvirate"
 
 	if(SSticker.current_state > GAME_STATE_PREGAME)
 		to_chat(usr, "This option is currently only usable during pregame. This may change at a later date.", confidential=TRUE)

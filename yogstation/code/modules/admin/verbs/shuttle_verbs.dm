@@ -5,7 +5,7 @@
 /client/proc/delay_shuttle()
 	set name = "Delay Shuttle"
 	set desc = "Toggles admin delay of the shuttle."
-	set category = "Admin.Round Interaction"
+	set category = "Admin"
 	var/static/datum/admin_delay/delay = new
 	
 	if(SSshuttle.hostileEnvironments.len)

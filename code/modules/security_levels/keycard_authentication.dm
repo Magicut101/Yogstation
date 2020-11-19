@@ -31,13 +31,11 @@ GLOBAL_DATUM_INIT(keycard_events, /datum/events, new)
 	QDEL_NULL(ev)
 	return ..()
 
-/obj/machinery/keycard_auth/ui_state(mob/user)
-	return GLOB.physical_state
-
-/obj/machinery/keycard_auth/ui_interact(mob/user, datum/tgui/ui)
-	ui = SStgui.try_update_ui(user, src, ui)
+/obj/machinery/keycard_auth/ui_interact(mob/user, ui_key = "main", datum/tgui/ui = null, force_open = FALSE, \
+					datum/tgui/master_ui = null, datum/ui_state/state = GLOB.physical_state)
+	ui = SStgui.try_update_ui(user, src, ui_key, ui, force_open)
 	if(!ui)
-		ui = new(user, src, "KeycardAuth", name)
+		ui = new(user, src, ui_key, "KeycardAuth", name, 375, 125, master_ui, state)
 		ui.open()
 
 /obj/machinery/keycard_auth/ui_data()

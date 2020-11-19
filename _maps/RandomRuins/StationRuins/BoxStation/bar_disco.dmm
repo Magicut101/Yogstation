@@ -735,7 +735,6 @@
 	dir = 4;
 	icon_state = "scrub_map_on-3"
 	},
-/obj/effect/landmark/start/cook,
 /turf/open/floor/plasteel/ameridiner,
 /area/crew_quarters/kitchen)
 "cb" = (
@@ -791,10 +790,8 @@
 /area/crew_quarters/kitchen)
 "cp" = (
 /obj/structure/table,
-/obj/item/reagent_containers/glass/mixbowl{
-	pixel_x = 1;
-	pixel_y = 3
-	},
+/obj/item/stack/packageWrap,
+/obj/item/reagent_containers/food/condiment/enzyme,
 /turf/open/floor/plasteel/ameridiner,
 /area/crew_quarters/kitchen)
 "ct" = (
@@ -923,6 +920,13 @@
 /obj/effect/spawner/xmastree,
 /turf/open/floor/plasteel/dark,
 /area/crew_quarters/bar)
+"uB" = (
+/obj/structure/table,
+/obj/item/reagent_containers/glass/mixbowl{
+	pixel_y = 4
+	},
+/turf/open/floor/plasteel/ameridiner,
+/area/crew_quarters/kitchen)
 "vH" = (
 /obj/structure/table,
 /obj/machinery/requests_console{
@@ -940,35 +944,6 @@
 /obj/effect/landmark/event_spawn,
 /turf/open/floor/plating,
 /area/crew_quarters/bar)
-"xw" = (
-/obj/structure/table,
-/obj/item/reagent_containers/food/snacks/mint,
-/turf/open/floor/plasteel/ameridiner,
-/area/crew_quarters/kitchen)
-"BD" = (
-/obj/structure/table,
-/obj/item/storage/box/donkpockets{
-	pixel_x = 3;
-	pixel_y = 3
-	},
-/turf/open/floor/plasteel/ameridiner,
-/area/crew_quarters/kitchen)
-"FH" = (
-/obj/structure/table,
-/obj/item/kitchen/rollingpin{
-	pixel_x = 4;
-	pixel_y = -2
-	},
-/obj/item/reagent_containers/food/condiment/peppermill{
-	pixel_x = -3;
-	pixel_y = 8
-	},
-/obj/item/reagent_containers/food/condiment/saltshaker{
-	pixel_x = -8;
-	pixel_y = 4
-	},
-/turf/open/floor/plasteel/ameridiner,
-/area/crew_quarters/kitchen)
 "Gv" = (
 /obj/machinery/light_switch,
 /turf/closed/wall,
@@ -1014,14 +989,6 @@
 /obj/item/toy/beach_ball/holoball,
 /turf/open/floor/plating,
 /area/crew_quarters/bar)
-"Zg" = (
-/obj/structure/table,
-/obj/item/reagent_containers/food/condiment/enzyme{
-	layer = 5
-	},
-/obj/item/stack/packageWrap,
-/turf/open/floor/plasteel/ameridiner,
-/area/crew_quarters/kitchen)
 
 (1,1,1) = {"
 aa
@@ -1320,8 +1287,8 @@ bj
 ak
 bG
 bZ
-xw
-Zg
+co
+cy
 cy
 cy
 bx
@@ -1337,8 +1304,8 @@ bv
 bH
 aX
 cp
-BD
 cA
+cy
 cy
 bA
 aa
@@ -1352,8 +1319,8 @@ OT
 ak
 bI
 cb
-FH
-co
+bn
+cA
 cy
 cU
 bB
@@ -1368,8 +1335,8 @@ ba
 ak
 bJ
 cc
-bn
-co
+uB
+cy
 cy
 cy
 RL

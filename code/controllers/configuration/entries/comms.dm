@@ -32,6 +32,3 @@
 
 /datum/config_entry/string/webhook_key
 	protection = CONFIG_ENTRY_HIDDEN
-
-/datum/config_entry/string/xenforo_key
-	protection = CONFIG_ENTRY_HIDDEN

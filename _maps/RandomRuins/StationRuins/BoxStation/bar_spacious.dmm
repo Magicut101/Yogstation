@@ -306,7 +306,7 @@
 /turf/open/floor/wood,
 /area/crew_quarters/theatre)
 "aO" = (
-/obj/structure/musician/piano{
+/obj/structure/piano{
 	icon_state = "piano"
 	},
 /turf/open/floor/wood,

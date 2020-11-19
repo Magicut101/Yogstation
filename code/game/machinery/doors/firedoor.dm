@@ -284,9 +284,13 @@
 		close()
 
 /obj/machinery/door/firedoor/deconstruct(disassembled = TRUE)
-	if(!(flags_1 & NODECONSTRUCT_1) && disassembled)
+	if(!(flags_1 & NODECONSTRUCT_1))
 		var/obj/structure/firelock_frame/F = new assemblytype(get_turf(src))
-		F.constructionStep = CONSTRUCTION_PANEL_OPEN
+		if(disassembled)
+			F.constructionStep = CONSTRUCTION_PANEL_OPEN
+		else
+			F.constructionStep = CONSTRUCTION_WIRES_EXPOSED
+			F.obj_integrity = F.max_integrity * 0.5
 		F.update_icon()
 	qdel(src)
 

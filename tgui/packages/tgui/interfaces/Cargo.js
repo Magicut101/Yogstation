@@ -1,6 +1,6 @@
 import { toArray } from 'common/collections';
 import { Fragment } from 'inferno';
-import { useBackend, useSharedState } from '../backend';
+import { useBackend, useSharedState, useLocalState } from '../backend';
 import { AnimatedNumber, Box, Button, Flex, LabeledList, Section, Table, Tabs } from '../components';
 import { formatMoney } from '../format';
 import { Window } from '../layouts';
@@ -14,42 +14,37 @@ export const Cargo = (props, context) => {
   const cart = data.cart || [];
   const requests = data.requests || [];
   return (
-    <Window
-      width={780}
-      height={750}
-      resizable>
+    <Window resizable>
       <Window.Content scrollable>
         <CargoStatus />
-        <Section fitted>
-          <Tabs>
+        <Tabs>
+          <Tabs.Tab
+            icon="list"
+            selected={tab === 'catalog'}
+            onClick={() => setTab('catalog')}>
+            Catalog
+          </Tabs.Tab>
+          <Tabs.Tab
+            icon="envelope"
+            textColor={tab !== 'requests'
+              && requests.length > 0
+              && 'yellow'}
+            selected={tab === 'requests'}
+            onClick={() => setTab('requests')}>
+            Requests ({requests.length})
+          </Tabs.Tab>
+          {!requestonly && (
             <Tabs.Tab
-              icon="list"
-              selected={tab === 'catalog'}
-              onClick={() => setTab('catalog')}>
-              Catalog
-            </Tabs.Tab>
-            <Tabs.Tab
-              icon="envelope"
-              textColor={tab !== 'requests'
-                && requests.length > 0
+              icon="shopping-cart"
+              textColor={tab !== 'cart'
+                && cart.length > 0
                 && 'yellow'}
-              selected={tab === 'requests'}
-              onClick={() => setTab('requests')}>
-              Requests ({requests.length})
+              selected={tab === 'cart'}
+              onClick={() => setTab('cart')}>
+              Checkout ({cart.length})
             </Tabs.Tab>
-            {!requestonly && (
-              <Tabs.Tab
-                icon="shopping-cart"
-                textColor={tab !== 'cart'
-                  && cart.length > 0
-                  && 'yellow'}
-                selected={tab === 'cart'}
-                onClick={() => setTab('cart')}>
-                Checkout ({cart.length})
-              </Tabs.Tab>
-            )}
-          </Tabs>
-        </Section>
+          )}
+        </Tabs>
         {tab === 'catalog' && (
           <CargoCatalog />
         )}
@@ -120,9 +115,10 @@ const CargoStatus = (props, context) => {
 export const CargoCatalog = (props, context) => {
   const { express } = props;
   const { act, data } = useBackend(context);
-  const {
+  const [
     self_paid,
-  } = data;
+    set_self_paid,
+  ] = useLocalState(context, 'self_paid', 0);
   const supplies = toArray(data.supplies);
   const [
     activeSupplyName,
@@ -141,11 +137,11 @@ export const CargoCatalog = (props, context) => {
             ml={2}
             content="Buy Privately"
             checked={self_paid}
-            onClick={() => act('toggleprivate')} />
+            onClick={self_paid ? () => set_self_paid(0) : () => set_self_paid(1)} />
         </Fragment>
       )}>
       <Flex>
-        <Flex.Item ml={-1} mr={1}>
+        <Flex.Item>
           <Tabs vertical>
             {supplies.map(supply => (
               <Tabs.Tab
@@ -189,8 +185,9 @@ export const CargoCatalog = (props, context) => {
                       tooltipPosition="left"
                       onClick={() => act('add', {
                         id: pack.id,
+                        self_paid: self_paid,
                       })}>
-                      {formatMoney(self_paid && !pack.goody
+                      {formatMoney(self_paid
                         ? Math.round(pack.cost * 1.1)
                         : pack.cost)}
                       {' cr'}

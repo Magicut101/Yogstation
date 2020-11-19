@@ -215,7 +215,9 @@ GLOBAL_LIST_EMPTY(parasites) //all currently existing/living guardians
 		UnregisterSignal(summoner.current, COMSIG_MOVABLE_MOVED)
 	cut_barriers()
 	var/mob/living/carbon/H = summoner.current
-	remove_verb(H, list(/mob/living/proc/guardian_comm, /mob/living/proc/guardian_recall, /mob/living/proc/guardian_reset))
+	H.verbs -= /mob/living/proc/guardian_comm
+	H.verbs -= /mob/living/proc/guardian_recall
+	H.verbs -= /mob/living/proc/guardian_reset
 	berserk = TRUE
 	summoner = null
 	maxHealth = 750
@@ -642,13 +644,13 @@ GLOBAL_LIST_EMPTY(parasites) //all currently existing/living guardians
 						to_chat(src, "<span class='holoparasite'><font color=\"[G.namedatum.colour]\"><b>[G.real_name]</b></font> has been summoned!</span>")
 				guardians -= G
 				if(!guardians.len)
-					remove_verb(src, /mob/living/proc/guardian_reset)
+					verbs -= /mob/living/proc/guardian_reset
 			else
 				to_chat(src, "<span class='holoparasite'>There were no ghosts willing to take control of <font color=\"[G.namedatum.colour]\"><b>[G.real_name]</b></font>. Looks like you're stuck with it for now.</span>")
 		else
 			to_chat(src, "<span class='holoparasite'>You decide not to reset [guardians.len > 1 ? "any of your guardians":"your guardian"].</span>")
 	else
-		remove_verb(src, /mob/living/proc/guardian_reset)
+		verbs -= /mob/living/proc/guardian_reset
 
 ////////parasite tracking/finding procs
 

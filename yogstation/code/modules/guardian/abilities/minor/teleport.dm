@@ -6,11 +6,11 @@
 
 /datum/guardian_ability/minor/teleport/Apply()
 	..()
-	add_verb(guardian, /mob/living/simple_animal/hostile/guardian/proc/Beacon)
+	guardian.verbs += /mob/living/simple_animal/hostile/guardian/proc/Beacon
 
 /datum/guardian_ability/minor/teleport/Remove()
 	..()
-	remove_verb(guardian, /mob/living/simple_animal/hostile/guardian/proc/Beacon)
+	guardian.verbs -= /mob/living/simple_animal/hostile/guardian/proc/Beacon
 
 /obj/effect/proc_holder/spell/targeted/guardian/teleport
 	name = "Teleport"

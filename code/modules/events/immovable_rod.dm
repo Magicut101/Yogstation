@@ -49,7 +49,6 @@ In my current plan for it, 'solid' will be defined as anything with density == 1
 	pull_force = INFINITY
 	density = TRUE
 	anchored = TRUE
-	flags_1 = PREVENT_CONTENTS_EXPLOSION_1
 	var/mob/living/wizard
 	var/z_original = 0
 	var/destination
@@ -101,6 +100,9 @@ In my current plan for it, 'solid' will be defined as anything with density == 1
 	walk(src,0)
 	walk_towards(src, destination, 1)
 
+/obj/structure/closet/supplypod/prevent_content_explosion()
+	return TRUE
+
 /obj/effect/immovablerod/ex_act(severity, target)
 	return 0
 
@@ -124,10 +126,7 @@ In my current plan for it, 'solid' will be defined as anything with density == 1
 
 	if(isturf(clong) || isobj(clong))
 		if(clong.density)
-			if(isturf(clong))
-				SSexplosions.medturf += clong
-			if(isobj(clong))
-				SSexplosions.med_mov_atom += clong
+			clong.ex_act(EXPLODE_HEAVY)
 
 	else if(isliving(clong))
 		penetrate(clong)

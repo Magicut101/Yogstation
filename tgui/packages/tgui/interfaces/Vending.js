@@ -106,11 +106,7 @@ export const Vending = (props, context) => {
     ];
   }
   return (
-    <Window
-      title="Vending Machine"
-      width={450}
-      height={600}
-      resizable>
+    <Window resizable>
       <Window.Content scrollable>
         {!!data.onstation && (
           <Section title="User">

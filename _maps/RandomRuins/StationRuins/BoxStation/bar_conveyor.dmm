@@ -27,7 +27,7 @@
 /turf/closed/wall,
 /area/crew_quarters/bar)
 "af" = (
-/obj/structure/musician/piano,
+/obj/structure/piano,
 /turf/open/floor/plasteel/vaporwave,
 /area/crew_quarters/bar)
 "ag" = (
@@ -663,7 +663,6 @@
 	dir = 4;
 	icon_state = "scrub_map_on-3"
 	},
-/obj/effect/landmark/start/cook,
 /turf/open/floor/plasteel/vaporwave,
 /area/crew_quarters/kitchen)
 "bP" = (
@@ -724,6 +723,12 @@
 	},
 /turf/open/floor/plating/beach/sand,
 /area/crew_quarters/bar)
+"bY" = (
+/obj/structure/table,
+/obj/item/stack/packageWrap,
+/obj/item/reagent_containers/food/condiment/enzyme,
+/turf/open/floor/plasteel/vaporwave,
+/area/crew_quarters/kitchen)
 "bZ" = (
 /obj/structure/table/reinforced,
 /obj/structure/plasticflaps,
@@ -1109,22 +1114,6 @@
 /obj/effect/spawner/structure/window/plasma,
 /turf/open/floor/plating,
 /area/crew_quarters/bar)
-"ow" = (
-/obj/structure/table,
-/obj/item/kitchen/rollingpin{
-	pixel_x = 4;
-	pixel_y = -2
-	},
-/obj/item/reagent_containers/food/condiment/peppermill{
-	pixel_x = -3;
-	pixel_y = 8
-	},
-/obj/item/reagent_containers/food/condiment/saltshaker{
-	pixel_x = -8;
-	pixel_y = 4
-	},
-/turf/open/floor/plasteel/vaporwave,
-/area/crew_quarters/kitchen)
 "qM" = (
 /obj/machinery/atmospherics/pipe/simple/scrubbers/hidden/layer3{
 	dir = 9
@@ -1161,11 +1150,6 @@
 /obj/machinery/atmospherics/pipe/simple/supply/hidden/layer1,
 /turf/open/floor/wood,
 /area/crew_quarters/bar)
-"wu" = (
-/obj/structure/table,
-/obj/item/reagent_containers/food/snacks/mint,
-/turf/open/floor/plasteel/vaporwave,
-/area/crew_quarters/kitchen)
 "BP" = (
 /obj/effect/spawner/xmastree,
 /turf/open/floor/plasteel/vaporwave,
@@ -1182,14 +1166,6 @@
 	},
 /turf/open/floor/plasteel/vaporwave,
 /area/crew_quarters/bar)
-"Mi" = (
-/obj/structure/table,
-/obj/item/storage/box/donkpockets{
-	pixel_x = 3;
-	pixel_y = 3
-	},
-/turf/open/floor/plasteel/vaporwave,
-/area/crew_quarters/kitchen)
 "SA" = (
 /obj/effect/landmark/blobstart,
 /obj/item/clothing/mask/cigarette/rollie/cannabis,
@@ -1201,14 +1177,6 @@
 	pixel_x = 1;
 	pixel_y = 3
 	},
-/turf/open/floor/plasteel/vaporwave,
-/area/crew_quarters/kitchen)
-"Wr" = (
-/obj/structure/table,
-/obj/item/reagent_containers/food/condiment/enzyme{
-	layer = 5
-	},
-/obj/item/stack/packageWrap,
 /turf/open/floor/plasteel/vaporwave,
 /area/crew_quarters/kitchen)
 "XW" = (
@@ -1522,8 +1490,8 @@ bn
 al
 bl
 bO
-wu
-Wr
+bU
+bN
 bN
 bN
 ct
@@ -1538,9 +1506,9 @@ bo
 bD
 br
 bP
-VM
-Mi
+bY
 cf
+bN
 bN
 cw
 aa
@@ -1554,8 +1522,8 @@ cS
 al
 bA
 bQ
-ow
-bU
+ca
+cf
 bN
 cl
 cx
@@ -1570,8 +1538,8 @@ ba
 al
 bC
 bR
-ca
-bU
+VM
+bN
 bN
 bN
 XW

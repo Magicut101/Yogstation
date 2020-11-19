@@ -103,7 +103,7 @@
 	if(node)
 		node.atmosinit()
 		node.addMember(src)
-	SSair.add_to_rebuild_queue(src)
+	build_network()
 	return TRUE
 
 /obj/machinery/atmospherics/components/unary/thermomachine/ui_status(mob/user)
@@ -111,10 +111,11 @@
 		return ..()
 	return UI_CLOSE
 
-/obj/machinery/atmospherics/components/unary/thermomachine/ui_interact(mob/user, datum/tgui/ui)
-	ui = SStgui.try_update_ui(user, src, ui)
+/obj/machinery/atmospherics/components/unary/thermomachine/ui_interact(mob/user, ui_key = "main", datum/tgui/ui = null, force_open = FALSE, \
+																	datum/tgui/master_ui = null, datum/ui_state/state = GLOB.default_state)
+	ui = SStgui.try_update_ui(user, src, ui_key, ui, force_open)
 	if(!ui)
-		ui = new(user, src, "ThermoMachine", name)
+		ui = new(user, src, ui_key, "ThermoMachine", name, 300, 230, master_ui, state)
 		ui.open()
 
 /obj/machinery/atmospherics/components/unary/thermomachine/ui_data(mob/user)

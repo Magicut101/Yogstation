@@ -16,10 +16,11 @@
 	GLOB.alert_consoles -= src
 	return ..()
 
-/obj/machinery/computer/station_alert/ui_interact(mob/user, datum/tgui/ui)
-	ui = SStgui.try_update_ui(user, src, ui)
+/obj/machinery/computer/station_alert/ui_interact(mob/user, ui_key = "main", datum/tgui/ui = null, force_open = FALSE, \
+									datum/tgui/master_ui = null, datum/ui_state/state = GLOB.default_state)
+	ui = SStgui.try_update_ui(user, src, ui_key, ui, force_open)
 	if(!ui)
-		ui = new(user, src, "StationAlertConsole", name)
+		ui = new(user, src, ui_key, "StationAlertConsole", name, 325, 500, master_ui, state)
 		ui.open()
 
 /obj/machinery/computer/station_alert/ui_data(mob/user)
@@ -30,7 +31,7 @@
 		data["alarms"][class] = list()
 		for(var/area in alarms[class])
 			data["alarms"][class] += area
-
+	
 	return data
 
 /obj/machinery/computer/station_alert/proc/triggerAlarm(class, area/A, O, obj/source)

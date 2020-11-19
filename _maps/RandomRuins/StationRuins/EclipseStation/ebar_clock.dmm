@@ -947,7 +947,7 @@
 /turf/open/floor/bronze/reebe,
 /area/crew_quarters/theatre)
 "Ka" = (
-/obj/structure/musician/piano,
+/obj/structure/piano,
 /turf/open/floor/bronze/reebe,
 /area/crew_quarters/theatre)
 "Kl" = (

@@ -133,22 +133,10 @@
 	severity++
 	for(var/X in equipment)
 		var/obj/item/mecha_parts/mecha_equipment/ME = X
-		switch(severity)
-			if(EXPLODE_DEVASTATE)
-				SSexplosions.high_mov_atom += ME
-			if(EXPLODE_HEAVY)
-				SSexplosions.med_mov_atom += ME
-			if(EXPLODE_LIGHT)
-				SSexplosions.low_mov_atom += ME
+		ME.ex_act(severity,target)
 	for(var/Y in trackers)
 		var/obj/item/mecha_parts/mecha_tracking/MT = Y
-		switch(severity)
-			if(EXPLODE_DEVASTATE)
-				SSexplosions.high_mov_atom += MT
-			if(EXPLODE_HEAVY)
-				SSexplosions.med_mov_atom += MT
-			if(EXPLODE_LIGHT)
-				SSexplosions.low_mov_atom += MT
+		MT.ex_act(severity, target)
 	if(occupant)
 		occupant.ex_act(severity,target)
 
